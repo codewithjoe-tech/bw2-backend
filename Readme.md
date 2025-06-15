@@ -82,7 +82,7 @@ bw2-backend/
 ├── Dockerfile
 ├── requirements.txt
 ├── mysite/         
-└── authenticate/   
+├── authenticate/   
 └── chats/          
 ```
 
