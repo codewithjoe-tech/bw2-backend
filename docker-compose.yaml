@@ -1,0 +1,23 @@
+version: '3.8'
+
+services:
+  bw2web:
+    build: .
+    command: uvicorn mysite.asgi:application --host 0.0.0.0 --port 8000 --reload --lifespan off
+
+    volumes:
+      - .:/app
+    ports:
+      - "8000:8000"
+    environment:
+      - DEBUG=True
+      - DJANGO_SETTINGS_MODULE=mysite.settings
+      - CELERY_BROKER_URL=redis://redis:6379/0
+      - CELERY_RESULT_BACKEND=redis://redis:6379/0
+    depends_on:
+      - redis
+
+  redis:
+    image: redis:latest
+    ports:
+      - "6379:6379"
